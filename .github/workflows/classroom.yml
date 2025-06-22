@@ -1,0 +1,30 @@
+name: Autograding Tests
+'on':
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Teste do vetor dinâmico
+      id: teste-do-vetor-dinamico
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Teste do vetor dinâmico
+        setup-command: mkdir -p build && cd build && cmake .. && make && cd ..
+        command: cd build && make test ||cd ..
+        timeout: 10
+        max-score: 100
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TESTE-DO-VETOR-DINAMICO_RESULTS: "${{steps.teste-do-vetor-dinamico.outputs.result}}"
+      with:
+        runners: teste-do-vetor-dinamico
