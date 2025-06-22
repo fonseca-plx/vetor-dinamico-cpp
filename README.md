@@ -374,6 +374,19 @@ Um método `remove_range(a, b)` que remove todos os elementos entre os índices
 Um método em `v1` que recebe um outro vetor `v2` e insere todos os elementos de 
 `v2` em `v1`.
 
+## 🚀 Passos para submeter sua atividade:
+
+1. No terminal do Codespace, execute:
+```bash
+git add include/vector-lib/vector-array.hpp         # Informa que introducao.md entrará na próxima confirmação
+git commit -m "Implementação do método push_back()" # Confirma atualização/inclusão
+git push                                            # Envia todas as confirmações para o servidor
+```
+
+**Obs.:** Cada alteração em um arquivo deve ser seguida de um _commit_ com comentário adequado. A operação de _push_ deve ser feita quando você quiser enviar as alteração para o professor, normalmente depois de vários _commits_. 
+
+
+
 ## ✅ Critérios de Avaliação
 
 1. Corretude (50%):
