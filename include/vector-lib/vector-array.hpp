@@ -4,51 +4,118 @@ class vector_array {
 private:
     int *data;
     unsigned int size_, capacity_;
-    void increase_capacity() {}
+    void increase_capacity() {        
+        int new_capacity = this->capacity_ * 2;
+        int *new_data = new int[new_capacity];
+        for (unsigned int i = 0; i < this->size_; i++) {
+            new_data[i] = data[i];
+        }
+        delete [] this->data;
+        this->data = new_data;
+        this->capacity_ = new_capacity;
+    }
 
 public:
     vector_array() {         // Construtor
+        data = new int[8];
+        this->size_ = 0;
+        this->capacity_ = 8;
     }
     ~vector_array() { // Destrutor
+        delete [] data;
     }
     unsigned int size() { // Retorna a quantidade de elementos armazenados
-        return 0;
+        return this->size_;
     }
     unsigned int capacity() { // Retorna o espaço reservado para armazenar os elementos
-        return 0;
+        return this->capacity_;
     }
     double percent_occupied() { // Retorna um valor entre 0.0 a 1.0 com o percentual da
         return 0;               // memória usada.
     }
     bool insert_at(unsigned int index, int value) { // Insere elemento no índice index
-        return false;
+        if (index > this->size_) { 
+            return false;
+        }
+        if (this->size_ == this->capacity_) {
+            increase_capacity();
+        }
+        for (int i = this->size_; i > index; i--) {
+            this->data[i] = this->data[i - 1];
+        }
+        this->data[index] = value;
+        this->size_++;
+        return true;
     }
     bool remove_at(unsigned int index) { // Remove elemento do índice index
-        return false;
+        if (index >= this->size_) {
+            return false;
+        }
+        for (unsigned int i = index; i < this->size_; i++) {
+            this->data[i] = this->data[i + 1];
+        }
+        this->size_--;
+        return true;
     }
     bool is_empty() { // Retorna true se o vetor não contém elementos
-        return false;
+        return this->size_ == 0;
     }
-    int get_at(unsigned int index) { // Retorna elemento no índice index,
-        return -1;                   // −1 se índice inválido
+    int get_at(unsigned int index) { // Retorna elemento no índice index
+        if (index >= this->size_ || index < 0) {
+            return -1;              // −1 se índice inválido
+        }
+        return this->data[index];
     }
     void clear() { // Remove todos os elementos, deixando o vetor no estado inicial
     }
     void push_back(int value) { // Adiciona um elemento no ``final'' do vetor
+        if (this->size() == this->capacity()) {
+            increase_capacity();
+        }
+        this->data[this->size_] = value;
+        this->size_++;
     }
     void push_front(int value) { // Adiciona um elemento no ``início'' do vetor
+        if (this->size() == this->capacity()) {
+            increase_capacity();
+        }
+        int *new_data = new int[this->capacity_];
+        new_data[0] = value;
+        for (int i = 0; i < this->size_; i++) {
+            new_data[i+1] = data[i];
+        }
+        delete [] this->data;
+        this->data = new_data;
+        this->size_++;
     }
     bool pop_back() {            // Remove um elemento do ``final'' do vetor
-        return false;
+        if (this->size_ == 0) {
+            return false;
+        }
+        this->size_--;
+        return true;
     }
     bool pop_front() {           // Remove um elemento do ``início'' do vetor
-        return false;
+        if (this->size_ == 0) {
+            return false;
+        }
+        for (unsigned int i = 0; i < this->size_ - 1; i++) {
+            this->data[i] = this->data[i + 1];
+        }
+        this->size_--;
+        return true;
     }
     int back() {                 // Retorna o elemento do ``final'' do vetor
-        return -1;
+        if (this->size_ == 0) {
+            return -1;
+        }
+        return this->data[this->size_ - 1];
     }
     int front() {                // Retorna o elemento do ``início'' do vetor
-        return -1;
+        if (this->size_ == 0) {
+            return -1;
+        }
+        return this->data[0];
     }
     bool remove(int value) {     // Remove value do vetor caso esteja presente
         return false;            // Deve retornar true se value foi removido
