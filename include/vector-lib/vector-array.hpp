@@ -139,7 +139,13 @@ public:
         return -1;
     }
     int count(int value) {       // Retorna quantas vezes value occorre no vetor
-        return 0;                // Retorna 0 se value não estiver presente
+        int sum = 0;
+        for (unsigned int i=0; i < this->size_; i++) {
+            if (this->data[i] == value) {
+                sum++;
+            }
+        }
+        return sum;                // Retorna 0 se value não estiver presente
     }
     int sum() {                  // Retorna a soma dos elementos do vetor
         return 0;                // Retorna 0 se o vetor estiver vazio
