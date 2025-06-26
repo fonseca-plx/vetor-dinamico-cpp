@@ -18,8 +18,9 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Teste do vetor dinâmico
-        setup-command: mkdir -p build && cd build && cmake .. && make && cd ..
-        command: cd build && make test ||cd ..
+        setup-command: sudo apt update && sudo apt -y install valgrind && mkdir -p
+          build && cd build && cmake .. && make && cd ..
+        command: 'cd build && make test '
         timeout: 10
         max-score: 100
     - name: Autograding Reporter
