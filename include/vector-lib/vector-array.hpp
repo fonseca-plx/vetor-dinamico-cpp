@@ -40,7 +40,7 @@ public:
         if (this->size_ == this->capacity_) {
             increase_capacity();
         }
-        for (int i = this->size_; i > index; i--) {
+        for (unsigned int i = this->size_; i > index; i--) {
             this->data[i] = this->data[i - 1];
         }
         this->data[index] = value;
@@ -61,12 +61,16 @@ public:
         return this->size_ == 0;
     }
     int get_at(unsigned int index) { // Retorna elemento no índice index
-        if (index >= this->size_ || index < 0) {
+        if (index >= this->size_) {
             return -1;              // −1 se índice inválido
         }
         return this->data[index];
     }
     void clear() { // Remove todos os elementos, deixando o vetor no estado inicial
+        delete [] data;
+        data = new int[8];
+        this->size_ = 0;
+        this->capacity_ = 8;
     }
     void push_back(int value) { // Adiciona um elemento no ``final'' do vetor
         if (this->size() == this->capacity()) {
@@ -81,7 +85,7 @@ public:
         }
         int *new_data = new int[this->capacity_];
         new_data[0] = value;
-        for (int i = 0; i < this->size_; i++) {
+        for (unsigned int i = 0; i < this->size_; i++) {
             new_data[i+1] = data[i];
         }
         delete [] this->data;
@@ -118,9 +122,20 @@ public:
         return this->data[0];
     }
     bool remove(int value) {     // Remove value do vetor caso esteja presente
-        return false;            // Deve retornar true se value foi removido
+        for (unsigned int i = 0; i < this->size_; i++) {
+            if (this->data[i] == value) {
+                remove_at(i);
+                return true;
+            }
+        }
+        return false;
     }
     int find(int value) {        // Retorna o índice de value, −1 caso value não esteja presente
+        for (unsigned int i = 0; i < this->size_; i++) {
+            if (this->data[i] == value) {
+                return i;
+            }
+        }
         return -1;
     }
     int count(int value) {       // Retorna quantas vezes value occorre no vetor
