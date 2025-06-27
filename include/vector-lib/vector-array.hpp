@@ -30,8 +30,8 @@ public:
     unsigned int capacity() { // Retorna o espaço reservado para armazenar os elementos
         return this->capacity_;
     }
-    double percent_occupied() { // Retorna um valor entre 0.0 a 1.0 com o percentual da
-        return 0;               // memória usada.
+    double percent_occupied() { // Retorna um valor entre 0.0 a 1.0 com o percentual da memória usada
+        return static_cast<double>(this->size_)/this->capacity_;
     }
     bool insert_at(unsigned int index, int value) { // Insere elemento no índice index
         if (index > this->size_) { 
