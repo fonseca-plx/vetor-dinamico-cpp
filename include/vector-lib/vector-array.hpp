@@ -139,16 +139,20 @@ public:
         return -1;
     }
     int count(int value) {       // Retorna quantas vezes value occorre no vetor
-        int sum = 0;
+        int somador = 0;
         for (unsigned int i=0; i < this->size_; i++) {
             if (this->data[i] == value) {
-                sum++;
+                somador++;
             }
         }
-        return sum;                // Retorna 0 se value não estiver presente
+        return somador;                // Retorna 0 se value não estiver presente
     }
     int sum() {                  // Retorna a soma dos elementos do vetor
-        return 0;                // Retorna 0 se o vetor estiver vazio
+        int somador = 0;
+        for (unsigned int i=0; i < this->size_; i++) {
+            somador += this->data[i];
+        }
+        return somador;                // Retorna 0 se o vetor estiver vazio
     }
 };
 #endif // __VECTOR_LIST_IFRN__
