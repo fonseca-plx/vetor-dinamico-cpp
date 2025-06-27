@@ -11,6 +11,9 @@ private:
 
 public:
     vector_linked() {
+        this->head = nullptr;
+        this->tail = nullptr;
+        this->size_ = 0;
     }
     ~vector_linked() {
     }
