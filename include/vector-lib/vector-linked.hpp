@@ -43,6 +43,17 @@ public:
     void push_back(int value) { // Adiciona um elemento no ``final'' do vetor
     }
     void push_front(int value) { // Adiciona um elemento no ``início'' do vetor
+        int_node *new_node = new int_node;
+        new_node->value = value;
+        new_node->next = this->head;
+        new_node->prev = nullptr;
+        if (this->head == nullptr) {
+            this->tail = new_node;
+        }
+        else {
+            this->head->prev = new_node;
+        }
+        this->head = new_node;
     }
     bool pop_back() { // Remove um elemento do ``final'' do vetor
         return false;
