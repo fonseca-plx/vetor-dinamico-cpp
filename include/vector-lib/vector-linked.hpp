@@ -29,14 +29,53 @@ public:
     unsigned int capacity() { // Retorna o espaço reservado para armazenar os elementos
         return this->size_;
     }
-    double percent_occupied() { // Retorna um valor entre 0.0 a 1.0
-        return 0;               // com o percentual da memória usada.
+    double percent_occupied() { // Retorna um valor entre 0.0 a 1.0 com o percentual da memória usada.
+        return (this->size_ == 0) ? 0.0 : 1.0;
     }
     bool insert_at(unsigned int index, int value) { // Insere elemento no índice index
-        return false;
+        if (index > this->size_) { 
+            return false;
+        }
+        if (index == 0) {
+            push_front(value);
+            return true;
+        } 
+        if (index == this->size_) {
+            push_back(value);
+            return true;
+        }
+        int_node *new_node = new int_node;
+        new_node->value = value;
+        int_node *current = this->head;
+        for (unsigned int i = 0; i < index; i++) {
+            current = current->next;
+        }
+        new_node->prev = current->prev;
+        new_node->next = current;
+        current->prev->next = new_node;
+        current->prev = new_node;
+        this->size_++;
+        return true;
     }
     bool remove_at(unsigned int index) { // Remove elemento do índice index
-        return false;
+        if (index >= this->size_) {
+            return false;
+        }
+        if (index == 0) {
+            return pop_front();
+        }
+        if (index == this->size_ - 1) {
+            return pop_back();
+        }
+        int_node *current = this->head;
+        for (unsigned int i = 0; i < index; i++) {
+            current = current->next;
+        }
+        current->prev->next = current->next;
+        current->next->prev = current->prev;
+        delete current;
+        this->size_--;
+        return true;
     }
     bool is_empty() { // Retorna true se o vetor não contém elementos
         return this->size_ == 0;
