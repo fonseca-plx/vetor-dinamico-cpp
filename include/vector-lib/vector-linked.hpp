@@ -103,10 +103,16 @@ public:
         return true;
     }
     int back() { // Retorna o elemento do ``final'' do vetor
-        return -1;
+        if (this->size() == 0) {
+            return -1;
+        }
+        return this->tail->value;
     }
     int front() { // Retorna o elemento do ``início'' do vetor
-        return -1;
+        if (this->size() == 0) {
+            return -1;
+        }
+        return this->head->value;
     }
     bool remove(int value) { // Remove value do vetor caso esteja presente
         return false;
