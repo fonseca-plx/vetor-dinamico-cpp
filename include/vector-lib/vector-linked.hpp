@@ -167,9 +167,29 @@ public:
         return this->head->value;
     }
     bool remove(int value) { // Remove value do vetor caso esteja presente
+        int_node *current = this->head;
+        unsigned int index = 0;
+
+        while (current != nullptr) {
+            if (current->value == value) {
+                return remove_at(index);
+            }
+            current = current->next;
+            index++;
+        }
         return false;
     }
     int find(int value) { // Retorna o índice de value, −1 caso value não esteja presente
+        int_node *current = this->head;
+        unsigned int index = 0;
+
+        while (current != nullptr) {
+            if (current->value == value) {
+                return index;
+            }
+            current = current->next;
+            index++;
+        }
         return -1;
     }
     int count(int value) { // Retorna quantas vezes value occorre no vetor
