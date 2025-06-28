@@ -16,6 +16,12 @@ public:
         this->size_ = 0;
     }
     ~vector_linked() {
+        int_node *current = this->head;
+        while (current != nullptr) {
+            int_node *to_remove = current;
+            current = current->next;
+            delete to_remove;
+        }
     }
     unsigned int size() { // Retorna a quantidade de elementos armazenados
         return 0;

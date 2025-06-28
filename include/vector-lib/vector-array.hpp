@@ -51,7 +51,7 @@ public:
         if (index >= this->size_) {
             return false;
         }
-        for (unsigned int i = index; i < this->size_; i++) {
+        for (unsigned int i = index; i < this->size_-1; i++) {
             this->data[i] = this->data[i + 1];
         }
         this->size_--;
