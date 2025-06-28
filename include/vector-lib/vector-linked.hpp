@@ -24,11 +24,11 @@ public:
         }
     }
     unsigned int size() { // Retorna a quantidade de elementos armazenados
-        return 0;
+        return this->size_;
     }
-    unsigned int capacity() { // Retorna o espaço
-        return 0;
-    } // reservado para armazenar os elementos
+    unsigned int capacity() { // Retorna o espaço reservado para armazenar os elementos
+        return this->size_;
+    }
     double percent_occupied() { // Retorna um valor entre 0.0 a 1.0
         return 0;               // com o percentual da memória usada.
     }
@@ -58,6 +58,7 @@ public:
             this->tail->next = new_node;
         }
         this->tail = new_node;
+        this->size_++;
     }
     void push_front(int value) { // Adiciona um elemento no ``início'' do vetor
         int_node *new_node = new int_node;
@@ -71,6 +72,7 @@ public:
             this->head->prev = new_node;
         }
         this->head = new_node;
+        this->size_++;
     }
     bool pop_back() { // Remove um elemento do ``final'' do vetor
         if (this->tail == nullptr) {
@@ -80,11 +82,13 @@ public:
             delete this->head;
             this->head = nullptr;
             this->tail = nullptr;
+            this->size_--;
             return true;
         }
         this->tail = this->tail->prev;
         delete this->tail->next;
         this->tail->next = nullptr;
+        this->size_--;
         return true;
     }
     bool pop_front() { // Remove um elemento do ``início'' do vetor
@@ -95,11 +99,13 @@ public:
             delete this->head;
             this->head = nullptr;
             this->tail = nullptr;
+            this->size_--;
             return true;
         }
         this->head = this->head->next;
         delete this->head->prev;
         this->head->prev = nullptr;
+        this->size_--;
         return true;
     }
     int back() { // Retorna o elemento do ``final'' do vetor
