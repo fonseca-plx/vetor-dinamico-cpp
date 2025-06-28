@@ -39,10 +39,17 @@ public:
         return false;
     }
     bool is_empty() { // Retorna true se o vetor não contém elementos
-        return false;
+        return this->size_ == 0;
     }
-    int get_at(unsigned int index) { // Retorna elemento no índice index,
-        return -1;                   // −1 se índice inválido
+    int get_at(unsigned int index) { // Retorna elemento no índice index
+        if (index >= this->size_) {
+            return -1;              // −1 se índice inválido
+        }
+        int_node *current = this->head;
+        for (unsigned int i = 0; i < index; i++) {
+            current = current->next;
+        }
+        return current->value;                 
     }
     void clear() { // Remove todos os elementos, deixando o vetor no estado inicial
     }
