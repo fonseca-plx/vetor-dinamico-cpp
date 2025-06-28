@@ -67,7 +67,19 @@ public:
         this->head = new_node;
     }
     bool pop_back() { // Remove um elemento do ``final'' do vetor
-        return false;
+        if (this->tail == nullptr) {
+            return false;
+        }
+        if (this->head == this->tail) {
+            delete this->head;
+            this->head = nullptr;
+            this->tail = nullptr;
+            return true;
+        }
+        this->tail = this->tail->prev;
+        delete this->tail->next;
+        this->tail->next = nullptr;
+        return true;
     }
     bool pop_front() { // Remove um elemento do ``início'' do vetor
         return false;
