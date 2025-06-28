@@ -82,7 +82,19 @@ public:
         return true;
     }
     bool pop_front() { // Remove um elemento do ``início'' do vetor
-        return false;
+        if (this->head == nullptr) {
+            return false;
+        }
+        if (this->head == this->tail) {
+            delete this->head;
+            this->head = nullptr;
+            this->tail = nullptr;
+            return true;
+        }
+        this->head = this->head->next;
+        delete this->head->prev;
+        this->head->prev = nullptr;
+        return true;
     }
     int back() { // Retorna o elemento do ``final'' do vetor
         return -1;
