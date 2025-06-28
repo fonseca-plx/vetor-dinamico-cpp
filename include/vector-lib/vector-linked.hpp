@@ -91,6 +91,15 @@ public:
         return current->value;                 
     }
     void clear() { // Remove todos os elementos, deixando o vetor no estado inicial
+        int_node *current = this->head;
+        while (current != nullptr) {
+            int_node *to_remove = current;
+            current = current->next;
+            delete to_remove;
+        }
+        this->head = nullptr;
+        this->tail = nullptr;
+        this->size_ = 0;
     }
     void push_back(int value) { // Adiciona um elemento no ``final'' do vetor
         int_node *new_node = new int_node;
@@ -169,7 +178,6 @@ public:
     bool remove(int value) { // Remove value do vetor caso esteja presente
         int_node *current = this->head;
         unsigned int index = 0;
-
         while (current != nullptr) {
             if (current->value == value) {
                 return remove_at(index);
@@ -182,7 +190,6 @@ public:
     int find(int value) { // Retorna o índice de value, −1 caso value não esteja presente
         int_node *current = this->head;
         unsigned int index = 0;
-
         while (current != nullptr) {
             if (current->value == value) {
                 return index;
@@ -193,10 +200,25 @@ public:
         return -1;
     }
     int count(int value) { // Retorna quantas vezes value occorre no vetor
-        return 0;
+        int_node *current = this->head;
+        int contador = 0;
+        while (current != nullptr) {
+            if (current->value == value) {
+                contador++;
+            }
+            current = current->next;
+        }
+        return contador;
     }
     int sum() { // Retorna a soma dos elementos do vetor
-        return 0;
+        int_node *current = this->head;
+        int soma = 0;
+
+        while (current != nullptr) {
+            soma += current->value;
+            current = current->next;
+        }
+        return soma;
     }
 };
 #endif // __VECTOR_LINKED_IFRN__
